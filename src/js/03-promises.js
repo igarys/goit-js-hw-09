@@ -32,11 +32,13 @@ formEl.addEventListener('submit', e => {
         Notiflix.Notify.success(
           `✅ Fulfilled promise ${position} in ${delay}ms`
         );
+        console.log('success');
       })
       .catch(({ position, delay }) => {
         Notiflix.Notify.failure(
           `❌ Rejected promise ${position} in ${delay}ms`
         );
+        console.log('error');
       });
   }
 });
