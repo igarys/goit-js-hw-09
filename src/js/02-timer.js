@@ -37,6 +37,7 @@ const options = {
         };
 
         function startTimer() {
+            startBtn.disabled = true;
             const addLeadingZero = value => value.toString().padStart(2, '0');
             let selectedDatesTime = selectedDates[0].getTime();
             let realTime = new Date().getTime();
@@ -62,9 +63,9 @@ const options = {
                 secondsTimer.textContent = addLeadingZero(seconds);
            
     
-            if (calculateMS < 1000) {
+            if (calculateMS < 1) {
+                
                 clearInterval(timer);
-                secondsTimer.textContent = 0
             }
         }, 1000)
     
