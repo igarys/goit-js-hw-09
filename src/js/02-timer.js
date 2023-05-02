@@ -66,6 +66,7 @@ const options = {
             if (calculateMS < 1) {
                 
                 clearInterval(timer);
+                Notiflix.Notify.success("TIMER'S UP!")
             }
         }, 1000)
     
