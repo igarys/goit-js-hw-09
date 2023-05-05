@@ -38,6 +38,7 @@ const options = {
 
         function startTimer() {
             startBtn.disabled = true;
+            dateEl.disabled = true;
             const addLeadingZero = value => value.toString().padStart(2, '0');
             let selectedDatesTime = selectedDates[0].getTime();
             let realTime = new Date().getTime();
@@ -77,7 +78,7 @@ const options = {
     console.log(selectedDates[0]);
     console.log(new Date());
     startBtn.addEventListener("click", startTimer)
-  },
+},
 };
 flatpickr(dateEl, options);
 
