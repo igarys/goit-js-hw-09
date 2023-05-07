@@ -20,6 +20,10 @@ timerEl.style.justifyContent = 'space-evenly';
 timerEl.style.marginTop = "150px";
 timerEl.style.fontSize = "50px";
 
+let selectedDatesTime = selectedDates[0].getTime();
+let realTime = new Date().getTime();
+let calculateMS = selectedDatesTime - realTime;
+
 const options = {
     enableTime: true,
     time_24hr: true,
@@ -27,22 +31,26 @@ const options = {
     minuteIncrement: 1,
 
     onClose(selectedDates) {
+        
         if (new Date() > selectedDates[0]) {
             return (
-              (startBtn.disabled = true),
-              Notiflix.Notify.warning('Please choose a date in the future')
+                (startBtn.disabled = true),
+                Notiflix.Notify.warning('Please choose a date in the future')
             );
         } else {
             startBtn.disabled = false;
+            startBtn.removeEventListener('click', startTimer);
+            clearInterval(timer);
         };
+    },
+};
 
-        function startTimer() {
-            startBtn.disabled = true;
-            dateEl.disabled = true;
-            const addLeadingZero = value => value.toString().padStart(2, '0');
-            let selectedDatesTime = selectedDates[0].getTime();
-            let realTime = new Date().getTime();
-            let calculateMS = selectedDatesTime - realTime;
+function startTimer() {
+    clearInterval(timer);
+    startBtn.disabled = true;
+    dateEl.disabled = true;
+    const addLeadingZero = value => value.toString().padStart(2, '0');
+            
 
             timer = setInterval(() => {
                 const second = 1000;
@@ -67,19 +75,17 @@ const options = {
             if (calculateMS < 1) {
                 
                 clearInterval(timer);
+                dateEl.disabled = false;
                 Notiflix.Notify.success("TIMER'S UP!")
+                startBtn.removeEventListener('click', startTimer);
             }
         }, 1000)
-    
+        
+        
     };
-
-
-
     console.log(selectedDates[0]);
     console.log(new Date());
     startBtn.addEventListener("click", startTimer)
-},
-};
 flatpickr(dateEl, options);
 
 
